@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from blog.models import User
-
+from flask_login import current_user
 
 class Regfrom(FlaskForm):
     uname = StringField('Username',
@@ -31,3 +31,24 @@ class Loginfrom(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(),])
     remember = BooleanField('Remeber Me')
     submit = SubmitField('Login')
+
+
+class UpdateAccpuntFrom(FlaskForm):
+    uname = StringField('Username',
+                        validators=[DataRequired(), Length(min=2, max=21)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    submit = SubmitField('Update')
+
+    def validate_uname(self, field):
+        if field.data != current_user.username:    
+            user = User.query.filter_by(uname=field.data).first()
+            if user:
+                raise ValidationError(f"The user name {field.data} already Exist")
+
+    def validate_email(self, field):
+        if field.data != current_user.email:
+            email = User.query.filter_by(email=field.data).first()
+            if email:
+                raise ValidationError(f"{field.data} already in use by another user")
+

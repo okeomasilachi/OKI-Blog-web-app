@@ -2,12 +2,49 @@
 {% block content %}
     <div class="content-section">
         <div class="media">
-        <img class="rounded-circle account-img" src="userimage.jpg">
-        <div class="media-body">
-            <h2 class="account-heading">{{ current_user.uname }} </h2>
-            <p class="text-secondary">{{ current_user.email }} </p>
-        </div>
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ current_user.uname }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
         </div>
         <!-- FORM HERE -->
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{ form.uname.label(class="form-control-label") }}
+                    {% if  form.uname.errors %}
+                        {{ form.uname(class="form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.uname.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.uname(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if  form.email.errors %}
+                        {{ form.email(class="form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="pt-1 pb-1">
+                <div class="form-group space" style="display: inline-block;">
+                    {{ form.submit(class="btn btn-outline-danger") }}
+                </div>
+            </div>            
+        </form>
     </div>
 {% endblock content %}

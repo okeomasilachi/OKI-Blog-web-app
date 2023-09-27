@@ -1,6 +1,6 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from blog import app, db, bc
-from blog.form import Regfrom, Loginfrom
+from blog.form import Regfrom, Loginfrom, UpdateAccpuntFrom
 from blog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -60,8 +60,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bc.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            next_page = request.args.get("next")
             flash(f"Welcome Back {user.uname}", "success")
-            return redirect(url_for("home"))
+            print(next_page)
+            return redirect(f"{next_page[1:]}") if next_page else redirect(url_for("home"))
         else:
             flash("Login Unsuccessful, Please check Credentials", "danger")
     return render_template("login.html", title="Login", form=form)
@@ -74,4 +76,7 @@ def logout():
 @app.route("/account",)
 @login_required
 def account():
-    return render_template("account.html", title="Account")
+    form = UpdateAccpuntFrom
+    image_file = url_for("static", filename="dpics/" + current_user.image_file)
+    return render_template("account.html", title="Account",
+                           image_file=image_file, form=form)

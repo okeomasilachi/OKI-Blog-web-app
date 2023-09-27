@@ -13,5 +13,7 @@ db = SQLAlchemy(app)
 bc = Bcrypt(app)
 login = LoginManager(app)
 login.login_view = "login"
+login.login_message_category = "info"
+
 
 from blog import routs
