@@ -13,7 +13,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 @login_required
 def home():
     page = request.args.get("page", 1, type=int)
-    post = Post.query.paginate(page=page, per_page=5)
+    post = Post.query.paginate(page=page, per_page=2)
     return render_template("home.html", posts=post)
 
 
@@ -153,4 +153,3 @@ def delete_post(post_id):
     db.session.commit()
     flash("Post Deleted", "success")
     return redirect(url_for("home"))
-

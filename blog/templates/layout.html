@@ -30,7 +30,7 @@
               <!-- Navbar Right Side -->
               <div class="navbar-nav ms-auto">
                 {% if current_user.is_authenticated %}
-                  <img class="rounded-circle article-img a-img " src="{{ url_for("static", filename="dpics/" + current_user.image_file) }}">
+                  <img class="rounded-circle article-img a-img" src="{{ url_for("static", filename="dpics/" + current_user.image_file) }}">
                   <a class="nav-item nav-link btn-3d" href="{{url_for("new_post")}}">New Post</a>
                   <a class="nav-item nav-link btn-3d" href="{{url_for("account")}}">Account</a>
                   <a class="nav-item nav-link btn-3d" href="{{url_for("logout")}} ">Logout</a>
