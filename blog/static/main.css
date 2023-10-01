@@ -82,3 +82,34 @@ body {
   .space {
     margin-top: 1rem;
   }
+
+/* Add 3D effect to buttons */
+.btn-3d {
+  border: none;
+  box-shadow: 0.5px 0px 1px rgba(88, 88, 88, 0.2);
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.3s;
+}
+
+.btn-3d:hover {
+  transform: translate3d(0, -3px, 0);
+}
+
+/* Add 3D effect to tabs */
+.nav-tabs .nav-link.active {
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Add 3D effect to sidebar items */
+.list-group-item-3d {
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transform: translate3d(0, 0, 0);
+}
+
+.list-group-item-3d:hover {
+  transform: translate3d(0, -3px, 0);
+}

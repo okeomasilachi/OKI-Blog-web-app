@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from blog import app, db, bc
-from blog.form import Regfrom, Loginfrom, UpdateAccpuntFrom
+from blog.form import Regfrom, Loginfrom, UpdateAccountFrom
 from blog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
